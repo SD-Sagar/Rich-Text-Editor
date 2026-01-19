@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rich Text Editor</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&family=Rubik+Gemstones&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="container">
+        <div class="toolbar">
+            <div class="head">
+                <input type="text" placeholder="Filename" value="File Name" id="filename">
+                <select name="" id="" onchange="handeFileExport(this.value)">
+                    <option value selected hidden disabled>File</option>
+                    <option value="new">New File</option>
+                    <option value="txt">Save as txt</option>
+                    <option value="pdf">Save as pdf</option>
+                </select>
+                <select name="" id="" onchange="formatdoc('formatBlock',this.value);this.selectedIndex=0">
+                    <option value selected hidden disabled>Format</option>
+                    <option value="h1">Heading 1</option>
+                    <option value="h2">Heading 2</option>
+                    <option value="h3">Heading 3</option>
+                    <option value="h4">Heading 4</option>
+                    <option value="h5">Heading 5</option>
+                    <option value="h6">Heading 6</option>
+                    <option value="p">Paragraph</option>
+                </select>
+                <select name="" id="" onchange="formatdoc('fontsize',this.value);this.selectedIndex=0">
+                    <option value selected hidden disabled>Font size</option>
+                    <option value="1">Extra small</option>
+                    <option value="2">Small</option>
+                    <option value="3">Regular</option>
+                    <option value="4">Medium</option>
+                    <option value="5">Large</option>
+                    <option value="6">Extra Large</option>
+                    <option value="7">Big</option>
+                </select>
+                <div class="color">
+                    <span>Color</span>
+                    <input type="color" oninput="formatdoc('foreColor',this.value);this.value='#111'"/>
+                </div>
+                <div class="color">
+                    <span>Background</span>
+                    <input type="color"  oninput="formatdoc('hiliteColor',this.value);this.value='#111'"/>
+                </div>
+            </div>
+            <div class="btn-toolbar">
+                <button onclick="formatdoc('undo')"><i class="fa-solid fa-rotate-left"></i></button>
+                <button onclick="formatdoc('redo')"><i class="fa-sharp fa-solid fa-rotate-right"></i></button>
+                <button onclick="formatdoc('bold')"><i class="fa-solid fa-bold"></i></button>
+                <button onclick="formatdoc('underline')"><i class="fa-solid fa-underline"></i></button>
+                <button onclick="formatdoc('italic')"><i class="fa-solid fa-italic"></i></button>
+                <button onclick="formatdoc('strikeThrough')"><i class="fa-solid fa-strikethrough"></i></button>
+                <button onclick="formatdoc('justifyLeft')"><i class="fa-solid fa-align-left"></i></button>
+                <button onclick="formatdoc('justifyCenter')"><i class="fa-solid fa-align-center"></i></button>
+                <button onclick="formatdoc('justifyRight')"><i class="fa-solid fa-align-right"></i></button>
+                <button onclick="formatdoc('justifyFull')"><i class="fa-solid fa-align-justify"></i></button>
+                <button onclick="formatdoc('insertOrderedList')"><i class="fa-solid fa-list-ol"></i></button>
+                <button onclick="formatdoc('insertUnorderedList')"><i class="fa-solid fa-list"></i></button>
+                <button onclick="handleLink()"><i class="fa-solid fa-link"></i></button>
+                <button onclick="formatdoc('unlink')"><i class="fa-solid fa-link-slash"></i></button>
+                <button data-active="false" id="showcode"><i class="fa-solid fa-code"></i></button>
+            </div>
+        </div>
+        <div id="content" contenteditable="true" spellcheck="false"></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="script.js"></script>
+</body>
+</html>
