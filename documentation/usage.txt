@@ -1,0 +1,10 @@
+Usage Guide:
+
+1. Open index.html
+2. Start writing in the editor
+3. Use toolbar for formatting
+4. Export your content using File menu
+5. Content is auto-saved automatically
+
+For integration:
+- Copy the content div and JS logic into your project
