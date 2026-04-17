@@ -1,0 +1,11 @@
+License Agreement
+
+You are allowed to:
+- Use this software in personal and commercial projects
+- Modify the code as per your needs
+
+You are NOT allowed to:
+- Resell, redistribute, or share this product as-is
+- Claim this work as your own
+
+Author: Sagar Dey
