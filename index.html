@@ -11,15 +11,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+    <div class="HeaderTitleContainer">
+        <h1>SD Word – Lightweight Vanilla JS Rich Text Editor</h1>
+        <span>(Fast, dependency-free editor with export & autosave)</span>
+        <div class="auto-save-indicator">
+            <span class="auto-save-status">Auto Save Enabled</span>
+            <span class="save-status">Saved automatically</span>
+        </div>
+    </div>
     <div class="container">
         <div class="toolbar">
             <div class="head">
                 <input type="text" placeholder="Filename" value="File Name" id="filename">
-                <select name="" id="" onchange="handeFileExport(this.value)">
+                <select name="" id="fileExport" onchange="handeFileExport(this.value)">
                     <option value selected hidden disabled>File</option>
                     <option value="new">New File</option>
                     <option value="txt">Save as txt</option>
                     <option value="pdf">Save as pdf</option>
+                    <option value="html">Save as HTML</option>
                 </select>
                 <select name="" id="" onchange="formatdoc('formatBlock',this.value);this.selectedIndex=0">
                     <option value selected hidden disabled>Format</option>
@@ -51,24 +60,37 @@
                 </div>
             </div>
             <div class="btn-toolbar">
-                <button onclick="formatdoc('undo')"><i class="fa-solid fa-rotate-left"></i></button>
-                <button onclick="formatdoc('redo')"><i class="fa-sharp fa-solid fa-rotate-right"></i></button>
-                <button onclick="formatdoc('bold')"><i class="fa-solid fa-bold"></i></button>
-                <button onclick="formatdoc('underline')"><i class="fa-solid fa-underline"></i></button>
-                <button onclick="formatdoc('italic')"><i class="fa-solid fa-italic"></i></button>
-                <button onclick="formatdoc('strikeThrough')"><i class="fa-solid fa-strikethrough"></i></button>
-                <button onclick="formatdoc('justifyLeft')"><i class="fa-solid fa-align-left"></i></button>
-                <button onclick="formatdoc('justifyCenter')"><i class="fa-solid fa-align-center"></i></button>
-                <button onclick="formatdoc('justifyRight')"><i class="fa-solid fa-align-right"></i></button>
-                <button onclick="formatdoc('justifyFull')"><i class="fa-solid fa-align-justify"></i></button>
-                <button onclick="formatdoc('insertOrderedList')"><i class="fa-solid fa-list-ol"></i></button>
-                <button onclick="formatdoc('insertUnorderedList')"><i class="fa-solid fa-list"></i></button>
-                <button onclick="handleLink()"><i class="fa-solid fa-link"></i></button>
-                <button onclick="formatdoc('unlink')"><i class="fa-solid fa-link-slash"></i></button>
-                <button data-active="false" id="showcode"><i class="fa-solid fa-code"></i></button>
+                <button onclick="formatdoc('undo')" title="Undo"><i class="fa-solid fa-rotate-left"></i></button>
+                <button onclick="formatdoc('redo')" title="Redo"><i class="fa-sharp fa-solid fa-rotate-right"></i></button>
+                <button onclick="formatdoc('bold')" title="Bold"><i class="fa-solid fa-bold"></i></button>
+                <button onclick="formatdoc('underline')" title="Underline"><i class="fa-solid fa-underline"></i></button>
+                <button onclick="formatdoc('italic')" title="Italic"><i class="fa-solid fa-italic"></i></button>
+                <button onclick="formatdoc('strikeThrough')" title="Strikethrough"><i class="fa-solid fa-strikethrough"></i></button>
+                <button onclick="formatdoc('justifyLeft')" title="Align Left"><i class="fa-solid fa-align-left"></i></button>
+                <button onclick="formatdoc('justifyCenter')" title="Align Center"><i class="fa-solid fa-align-center"></i></button>
+                <button onclick="formatdoc('justifyRight')" title="Align Right"><i class="fa-solid fa-align-right"></i></button>
+                <button onclick="formatdoc('justifyFull')" title="Justify"><i class="fa-solid fa-align-justify"></i></button>
+                <button onclick="formatdoc('insertOrderedList')" title="Ordered List"><i class="fa-solid fa-list-ol"></i></button>
+                <button onclick="formatdoc('insertUnorderedList')" title="Unordered List"><i class="fa-solid fa-list"></i></button>
+                <button onclick="handleLink()" title="Insert Link"><i class="fa-solid fa-link"></i></button>
+                <button onclick="formatdoc('unlink')" title="Remove Link"><i class="fa-solid fa-link-slash"></i></button>
+                <button onclick="copyAllContent()" title="Copy All"><i class="fa-solid fa-copy"></i></button>
+                <button onclick="resetAll()" title="Clear All"><i class="fa-solid fa-trash-can"></i></button>
+                <button onclick="window.print()" title="Print"><i class="fa-solid fa-print"></i></button>
+                <button data-active="false" id="showcode" title="Toggle Code View"><i class="fa-solid fa-code"></i></button>
             </div>
         </div>
-        <div id="content" contenteditable="true" spellcheck="false"></div>
+        <div id="content" contenteditable="true" spellcheck="false" placeholder="Start writing here…"></div>
+        <div class="word-count-container">
+            <div class="count-item">
+                <span class="count-label">Words:</span>
+                <span class="count-value" id="wordCount">0</span>
+            </div>
+            <div class="count-item">
+                <span class="count-label">Characters:</span>
+                <span class="count-value" id="charCount">0</span>
+            </div>
+        </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="script.js"></script>
